@@ -63,7 +63,7 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <com.JBCosemetics.jbscannerapp.views.NonSwipeableViewPager
+    <com.JBCosmetics.jbqrscannerapp.views.NonSwipeableViewPager
         android:id="@+id/home_viewpager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
