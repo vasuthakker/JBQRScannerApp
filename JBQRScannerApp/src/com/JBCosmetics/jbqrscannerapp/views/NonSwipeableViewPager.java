@@ -1,4 +1,4 @@
-package com.JBCosemetics.jbscannerapp.views;
+package com.JBCosmetics.jbqrscannerapp.views;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

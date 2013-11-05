@@ -30,11 +30,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.JBCosemetics.jbscannerapp.views.CameraPreview;
 import com.JBCosmetics.jbqrscannerapp.R;
+import com.JBCosmetics.jbqrscannerapp.common.Constants;
+import com.JBCosmetics.jbqrscannerapp.common.Utility;
 import com.JBCosmetics.jbqrscannerapp.fragments.HomeMiddleFragment;
-import com.JBCosmetics.jbscannerapp.common.Constants;
-import com.JBCosmetics.jbscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.views.CameraPreview;
 
 public class BarCodeScannerActvitiy extends FragmentActivity {
 

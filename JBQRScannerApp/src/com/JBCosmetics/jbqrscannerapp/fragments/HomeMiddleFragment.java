@@ -25,8 +25,8 @@ import com.JBCosmetics.jbqrscannerapp.R;
 import com.JBCosmetics.jbqrscannerapp.activities.BarCodeScannerActvitiy;
 import com.JBCosmetics.jbqrscannerapp.activities.CashierActivity;
 import com.JBCosmetics.jbqrscannerapp.activities.HomeActivity;
-import com.JBCosmetics.jbscannerapp.common.Constants;
-import com.JBCosmetics.jbscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.common.Constants;
+import com.JBCosmetics.jbqrscannerapp.common.Utility;
 
 public class HomeMiddleFragment extends Fragment {
 	private String isAccountSetup = null;

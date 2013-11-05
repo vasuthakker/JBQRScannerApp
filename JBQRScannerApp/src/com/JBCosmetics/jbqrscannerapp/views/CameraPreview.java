@@ -3,7 +3,7 @@
  * 
  * Created by lisah0 on 2012-02-24
  */
-package com.JBCosemetics.jbscannerapp.views;
+package com.JBCosmetics.jbqrscannerapp.views;
 
 import android.content.Context;
 import android.hardware.Camera;

@@ -1,4 +1,4 @@
-package com.JBCosmetics.jbscannerapp.common;
+package com.JBCosmetics.jbqrscannerapp.common;
 
 public final class Constants {
 

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.JBCosmetics.jbqrscannerapp.R;
-import com.JBCosmetics.jbscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.common.Utility;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

@@ -19,8 +19,8 @@ import android.widget.Toast;
 import com.JBCosmetics.jbqrscannerapp.R;
 import com.JBCosmetics.jbqrscannerapp.activities.PrivacyPolicyActivity;
 import com.JBCosmetics.jbqrscannerapp.activities.TermsNConditionActivity;
-import com.JBCosmetics.jbscannerapp.common.Constants;
-import com.JBCosmetics.jbscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.common.Constants;
+import com.JBCosmetics.jbqrscannerapp.common.Utility;
 
 public class HomeAccountFragment extends Fragment {
 

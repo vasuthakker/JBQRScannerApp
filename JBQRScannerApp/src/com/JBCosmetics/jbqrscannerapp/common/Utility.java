@@ -1,4 +1,4 @@
-package com.JBCosmetics.jbscannerapp.common;
+package com.JBCosmetics.jbqrscannerapp.common;
 
 import android.content.Context;
 import android.content.SharedPreferences;

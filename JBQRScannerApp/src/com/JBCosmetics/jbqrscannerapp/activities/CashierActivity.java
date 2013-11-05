@@ -16,8 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.JBCosmetics.jbqrscannerapp.R;
-import com.JBCosmetics.jbscannerapp.common.Constants;
-import com.JBCosmetics.jbscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.common.Constants;
+import com.JBCosmetics.jbqrscannerapp.common.Utility;
 
 public class CashierActivity extends FragmentActivity {
 
