@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JBQRScannerApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="home_title">LOYALTY CARD</string>
+    <string name="home_middle_detail">COLLECT ALL 6 STAMPS FOR FREE MICRODERMABRASSION</string>
+    <string name="redeem">REDEEM</string>
+    <string name="title_activity_bar_code_scanner_actvitiy">BarCodeScannerActvitiy</string>
+    <string name="scan_code">SCAN CODE</string>
+    <string name="qrmessage_dialog_text">SCAN THE LOYLTY BARCODE WHILST MAKING YOUR PAYMENT</string>
+    <string name="ok">OK</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_tel_no">Tel No</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_and_condition">Terms &amp; Conditions</string>
+    <string name="my_account">MY ACCOUNT</string>
+    <string name="tnc">T&amp;CS</string>
+    <string name="privacy_policy_title">PRIVACY POLICY</string>
+    <string name="locations">LOCATIONS</string>
+    <string name="dialog_loyalty_code_title">Scan Loyalty Code</string>
+    <string name="cancel">Cancel</string>
+    <string name="title_activity_privacy_policy">PrivacyPolicyActivity</string>
+    <string name="title_activity_terms_ncondition">TermsNConditionActivity</string>
+    <string name="save">Save</string>
+    <string name="telephone">Telephone</string>
+    <string name="error_dialog_title">Code Invalid</string>
+    <string name="error_dialog_message">Sorry Code is invalid Please try again</string>
+    <string name="nearly_there">Nearly There</string>
+    <string name="account_popup_message">To redeem your reward you will need to have set up and account</string>
+    <string name="later">Later</string>
+    <string name="setup">Setup</string>
+    <string name="account_setup_notification">Saved Account successfully</string>
+    <string name="title_activity_cashier">CashierActivity</string>
+    <string name="reset">Reset</string>
+    <string name="cashier">Cashier</string>
+    <string name="errormsg_maperror">There is some problem with google maps, Please try after some time</string>
+    <string name="congratulation">Congratulation</string>
+    <string name="redeem_pop_message">To redeem your coupon, please hand to the cashier to rest</string>
+    <string name="wrong_passcode_title">Code Invalid</string>
+    <string name="wrong_passcode_message">Incorrect code please try again</string>
+
+</resources>

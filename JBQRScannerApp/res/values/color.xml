@@ -1,0 +1,12 @@
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="litegrey">#E1E2E1</color>
+    <color name="liteblue_1">#70D1DE</color>
+    <color name="liteblue_2">#4C939D</color>
+    <color name="grey"> #D7DBD9</color>
+    <color name="inactiveliteblue"> #C5EEF2</color>
+    <color name="maroon"> #CC0000</color>
+    <color name="lite_green">#C1FFBF</color>
+
+</resources>

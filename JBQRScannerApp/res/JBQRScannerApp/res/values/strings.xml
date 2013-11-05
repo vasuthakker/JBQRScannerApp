@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JBQRScannerApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="home_title">LOYALTY CARD</string>
+    <string name="home_middle_detail">COLLECT ALL 6 STAMPS FOR FREE MICRODERMABRASSION</string>
+    <string name="redeem">REDEEM</string>
+    <string name="title_activity_bar_code_scanner_actvitiy">BarCodeScannerActvitiy</string>
+    <string name="scan_code">SCAN CODE</string>
+    <string name="qrmessage_dialog_text">SCAN THE LOYLTY BARCODE WHILE MAKING YOUR PAYMENT</string>
+    <string name="ok">OK</string>
+
+</resources>
