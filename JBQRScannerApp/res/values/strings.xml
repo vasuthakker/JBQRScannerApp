@@ -42,5 +42,6 @@
     <string name="redeem_pop_message">To redeem your coupon, please hand to the cashier to rest</string>
     <string name="wrong_passcode_title">Code Invalid</string>
     <string name="wrong_passcode_message">Incorrect code please try again</string>
+    <string name="progressbar_message">Saving account details, Please wait</string>
 
 </resources>

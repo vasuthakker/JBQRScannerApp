@@ -1,6 +1,9 @@
 package com.JBCosmetics.jbqrscannerapp.fragments;
 
+import android.app.DownloadManager.Request;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -16,11 +19,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.JBConsmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.Response;
+import com.JBConsmetics.jbqrscannerapp.entities.UserAccountInfoRequestEntity;
 import com.JBCosmetics.jbqrscannerapp.R;
 import com.JBCosmetics.jbqrscannerapp.activities.PrivacyPolicyActivity;
 import com.JBCosmetics.jbqrscannerapp.activities.TermsNConditionActivity;
-import com.JBCosmetics.jbqrscannerapp.common.Constants;
+import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
+import com.JBCosmetics.jbqrscannerapp.common.PropertyReader;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
+import com.google.android.gms.internal.em;
+import com.google.gson.Gson;
 
 public class HomeAccountFragment extends Fragment {
 
@@ -93,11 +101,11 @@ public class HomeAccountFragment extends Fragment {
 		});
 
 		String accountName = Utility.getPreference(getActivity(),
-				Constants.ACCOUNT_NAME);
+				JBConstants.ACCOUNT_NAME);
 		String accountEmail = Utility.getPreference(getActivity(),
-				Constants.ACCOUNT_EMAIL);
+				JBConstants.ACCOUNT_EMAIL);
 		String accountPhoneNumber = Utility.getPreference(getActivity(),
-				Constants.ACCOUNT_PHONE_NUMBER);
+				JBConstants.ACCOUNT_PHONE_NUMBER);
 
 		nameEditText.setText(accountName);
 		emailEditText.setText(accountEmail);
@@ -110,26 +118,26 @@ public class HomeAccountFragment extends Fragment {
 				String accountName = nameEditText.getText().toString();
 				if (accountName != null && accountName.trim().length() > 0) {
 					Utility.setPreference(getActivity(),
-							Constants.ACCOUNT_NAME, accountName);
+							JBConstants.ACCOUNT_NAME, accountName);
 				}
 				String accountEmail = emailEditText.getText().toString();
 				if (accountEmail != null && accountEmail.trim().length() > 0) {
 					Utility.setPreference(getActivity(),
-							Constants.ACCOUNT_EMAIL, accountEmail);
+							JBConstants.ACCOUNT_EMAIL, accountEmail);
 				}
 				String accountPhoneNumber = phoneEditText.getText().toString();
 				if (accountPhoneNumber != null
 						&& accountPhoneNumber.trim().length() > 0) {
 					Utility.setPreference(getActivity(),
-							Constants.ACCOUNT_PHONE_NUMBER, accountPhoneNumber);
+							JBConstants.ACCOUNT_PHONE_NUMBER,
+							accountPhoneNumber);
 				}
 
-				Utility.setPreference(getActivity(), Constants.ACCOUNT_SAVED,
+				Utility.setPreference(getActivity(), JBConstants.ACCOUNT_SAVED,
 						"Y");
 
-				Toast.makeText(getActivity(),
-						getString(R.string.account_setup_notification),
-						Toast.LENGTH_SHORT).show();
+				new SaveAccountDetailAsyncTask().execute(accountName,
+						accountEmail, accountPhoneNumber);
 			}
 		});
 
@@ -225,6 +233,75 @@ public class HomeAccountFragment extends Fragment {
 
 			}
 		});
+
+	}
+
+	private class SaveAccountDetailAsyncTask extends
+			AsyncTask<String, Void, Boolean> {
+
+		private static final int SUCCESS_RESULT = 1;
+		ProgressDialog progressBarDialog;
+
+		@Override
+		protected void onPreExecute() {
+			progressBarDialog = new ProgressDialog(getActivity());
+			progressBarDialog.setCancelable(false);
+			progressBarDialog.setCanceledOnTouchOutside(false);
+			progressBarDialog
+					.setMessage(getString(R.string.progressbar_message));
+			progressBarDialog.show();
+		}
+
+		@Override
+		protected Boolean doInBackground(String... params) {
+			boolean success = false;
+			if (Utility.isConnectedToInternet(getActivity())) {
+				String name = params[0];
+				String email = params[1];
+				String phoneNumber = params[2];
+
+				UserAccountInfoRequestEntity request = new UserAccountInfoRequestEntity();
+				request.setAuth(Utility.getPreference(getActivity(),
+						JBConstants.AUTH_TOKEN));
+				request.setDeviceid(Utility.getPreference(getActivity(),
+						JBConstants.DEVICE_ID));
+				request.setEmail(email);
+				request.setMobile(phoneNumber);
+				request.setName(name);
+
+				Gson gson = new Gson();
+				String jsonRequest = gson.toJson(request);
+
+				// sending request
+				String jsonResponse = Utility.sendPost(PropertyReader
+						.getProperty(getActivity(),
+								JBConstants.USER_ACCOUNT_URL), jsonRequest);
+
+				// getting response
+				Response respose = gson.fromJson(jsonResponse, Response.class);
+
+				// checking response
+				if (respose.getResult() == SUCCESS_RESULT) {
+					success = true;
+				}
+			}
+			return success;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (progressBarDialog != null && progressBarDialog.isShowing()) {
+				progressBarDialog.dismiss();
+			}
+			String toastMessage;
+			if (result) {
+				toastMessage = getString(R.string.account_setup_notification);
+			} else {
+				toastMessage = "fail";
+			}
+			Toast.makeText(getActivity(), toastMessage, Toast.LENGTH_SHORT)
+					.show();
+		}
 	}
 
 }

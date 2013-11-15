@@ -9,7 +9,10 @@ import net.sourceforge.zbar.ImageScanner;
 import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.ColorDrawable;
@@ -30,10 +33,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.JBConsmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.QrCode;
+import com.JBConsmetics.jbqrscannerapp.entities.ClaimRequestEntity;
+import com.JBConsmetics.jbqrscannerapp.services.SendRequestForClaimsService;
 import com.JBCosmetics.jbqrscannerapp.R;
-import com.JBCosmetics.jbqrscannerapp.common.Constants;
+import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
+import com.JBCosmetics.jbqrscannerapp.common.LocationTracker;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
 import com.JBCosmetics.jbqrscannerapp.fragments.HomeMiddleFragment;
+import com.JBCosmetics.jbqrscannerapp.helper.QRClaimsHelper;
+import com.JBCosmetics.jbqrscannerapp.helper.QRCodesHelper;
 import com.JBCosmetics.jbqrscannerapp.views.CameraPreview;
 
 public class BarCodeScannerActvitiy extends FragmentActivity {
@@ -57,10 +66,11 @@ public class BarCodeScannerActvitiy extends FragmentActivity {
 
 	private int postToScan;
 
-	private List<String> locations;
+	private static List<String> locations;
+	private static List<QrCode> codes;
 
 	static {
-		System.loadLibrary(Constants.ICONVLIBRARYNAME);
+		System.loadLibrary(JBConstants.ICONVLIBRARYNAME);
 	}
 
 	@Override
@@ -92,7 +102,7 @@ public class BarCodeScannerActvitiy extends FragmentActivity {
 		preview = (FrameLayout) findViewById(R.id.cameralayout);
 
 		if (!Utility.getBooleanPreference(getApplicationContext(),
-				Constants.MESSAGE_DIALOG_SHOWN)) {
+				JBConstants.MESSAGE_DIALOG_SHOWN)) {
 			DialogFragment messageDialog = new MessageDialog();
 			messageDialog.show(getSupportFragmentManager(), "message");
 		}
@@ -104,7 +114,7 @@ public class BarCodeScannerActvitiy extends FragmentActivity {
 		// by default setting focus image to white
 		cameraFocusImageView.setImageResource(R.drawable.barcode_border_white);
 
-		postToScan = getIntent().getIntExtra(Constants.TICKET_NO, -1);
+		postToScan = getIntent().getIntExtra(JBConstants.TICKET_NO, -1);
 
 		try {
 			preview.addView(mPreview);
@@ -126,11 +136,16 @@ public class BarCodeScannerActvitiy extends FragmentActivity {
 			}
 		});
 
-		locations = new ArrayList<String>();
+		codes = QRCodesHelper.getQRCodes(getApplicationContext(), null, null,
+				null, null, null);
+		if (codes != null) {
 
-		locations.add("bristol");
-		locations.add("bath");
-		locations.add("langford");
+			locations = new ArrayList<String>();
+
+			for (QrCode code : codes) {
+				locations.add(code.getCode());
+			}
+		}
 
 	}
 
@@ -190,10 +205,14 @@ public class BarCodeScannerActvitiy extends FragmentActivity {
 						String barcodeResult = sym.getData();
 
 						try {
-							if (locations.contains(barcodeResult.substring(
-									barcodeResult.lastIndexOf('/') + 1,
-									barcodeResult.lastIndexOf('.')))) {
+							if (locations.contains(barcodeResult)) {
 
+								// insert claim
+								insertClaim();
+
+								setService(getApplicationContext());
+
+								// start home activity
 								Intent in = new Intent(getApplicationContext(),
 										HomeActivity.class);
 								startActivity(in);
@@ -251,7 +270,7 @@ public class BarCodeScannerActvitiy extends FragmentActivity {
 
 					// setting preference for dialog
 					Utility.setPreference(getApplicationContext(),
-							Constants.MESSAGE_DIALOG_SHOWN, true);
+							JBConstants.MESSAGE_DIALOG_SHOWN, true);
 
 					dialog.dismiss();
 					// barcodeScanRequested = true;
@@ -298,5 +317,30 @@ public class BarCodeScannerActvitiy extends FragmentActivity {
 			return dialog;
 		}
 
+	}
+
+	// insert a claim
+	private void insertClaim() {
+		ClaimRequestEntity claim = LocationTracker
+				.getLatLong(getApplicationContext());
+		claim.setQr_code_id(postToScan);
+		claim.setScanTime(System.currentTimeMillis());
+
+		// inserting claim
+		QRClaimsHelper.insetClaim(getApplicationContext(), claim);
+
+	}
+
+	private void setService(Context context) {
+		// setting service
+		Intent intent = new Intent(context, SendRequestForClaimsService.class);
+		PendingIntent pi = PendingIntent.getService(context, 1, intent,
+				PendingIntent.FLAG_ONE_SHOT);
+		AlarmManager manager = (AlarmManager) context
+				.getSystemService(Context.ALARM_SERVICE);
+		if (manager != null) {
+			manager.setRepeating(AlarmManager.RTC_WAKEUP,
+					System.currentTimeMillis(), AlarmManager.INTERVAL_HOUR, pi);
+		}
 	}
 }

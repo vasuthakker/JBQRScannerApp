@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.JBCosmetics.jbqrscannerapp.R;
-import com.JBCosmetics.jbqrscannerapp.common.Constants;
+import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
 
 public class CashierActivity extends FragmentActivity {
@@ -62,36 +62,36 @@ public class CashierActivity extends FragmentActivity {
 				enteredPasscode.append(edittext_3.getText().toString());
 				enteredPasscode.append(edittext_4.getText().toString());
 
-				if (enteredPasscode.toString().equals(Constants.RESETPASSCODE)) {
+				if (enteredPasscode.toString().equals(JBConstants.RESETPASSCODE)) {
 
 					// getting values from preference
 					String isAccountAdded = Utility.getPreference(
-							getApplicationContext(), Constants.ACCOUNT_SAVED);
+							getApplicationContext(), JBConstants.ACCOUNT_SAVED);
 					String accountName = Utility.getPreference(
-							getApplicationContext(), Constants.ACCOUNT_NAME);
+							getApplicationContext(), JBConstants.ACCOUNT_NAME);
 					String accountEmail = Utility.getPreference(
-							getApplicationContext(), Constants.ACCOUNT_EMAIL);
+							getApplicationContext(), JBConstants.ACCOUNT_EMAIL);
 					String accountPhoneNumber = Utility.getPreference(
 							getApplicationContext(),
-							Constants.ACCOUNT_PHONE_NUMBER);
+							JBConstants.ACCOUNT_PHONE_NUMBER);
 					boolean QRScandialogShown = Utility.getBooleanPreference(
 							getApplicationContext(),
-							Constants.MESSAGE_DIALOG_SHOWN);
+							JBConstants.MESSAGE_DIALOG_SHOWN);
 
 					// reseting the preference
 					Utility.resetPreference(getApplicationContext());
 
 					// putting the old values
 					Utility.setPreference(getApplicationContext(),
-							Constants.ACCOUNT_SAVED, isAccountAdded);
+							JBConstants.ACCOUNT_SAVED, isAccountAdded);
 					Utility.setPreference(getApplicationContext(),
-							Constants.ACCOUNT_NAME, accountName);
+							JBConstants.ACCOUNT_NAME, accountName);
 					Utility.setPreference(getApplicationContext(),
-							Constants.ACCOUNT_EMAIL, accountEmail);
+							JBConstants.ACCOUNT_EMAIL, accountEmail);
 					Utility.setPreference(getApplicationContext(),
-							Constants.ACCOUNT_PHONE_NUMBER, accountPhoneNumber);
+							JBConstants.ACCOUNT_PHONE_NUMBER, accountPhoneNumber);
 					Utility.setPreference(getApplicationContext(),
-							Constants.MESSAGE_DIALOG_SHOWN, QRScandialogShown);
+							JBConstants.MESSAGE_DIALOG_SHOWN, QRScandialogShown);
 
 					setResult(RESULT_OK, null);
 					finish();

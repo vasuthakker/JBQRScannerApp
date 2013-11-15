@@ -25,7 +25,7 @@ import com.JBCosmetics.jbqrscannerapp.R;
 import com.JBCosmetics.jbqrscannerapp.activities.BarCodeScannerActvitiy;
 import com.JBCosmetics.jbqrscannerapp.activities.CashierActivity;
 import com.JBCosmetics.jbqrscannerapp.activities.HomeActivity;
-import com.JBCosmetics.jbqrscannerapp.common.Constants;
+import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
 
 public class HomeMiddleFragment extends Fragment {
@@ -96,12 +96,12 @@ public class HomeMiddleFragment extends Fragment {
 				R.id.reddem_button_layout);
 
 		// on click listeners for button
-		btn1.setOnClickListener(new ButtonClickListener("", 1));
-		btn2.setOnClickListener(new ButtonClickListener("", 2));
-		btn3.setOnClickListener(new ButtonClickListener("", 3));
-		btn4.setOnClickListener(new ButtonClickListener("", 4));
-		btn5.setOnClickListener(new ButtonClickListener("", 5));
-		btn6.setOnClickListener(new ButtonClickListener("", 6));
+		btn1.setOnClickListener(new ButtonClickListener(""));
+		btn2.setOnClickListener(new ButtonClickListener(""));
+		btn3.setOnClickListener(new ButtonClickListener(""));
+		btn4.setOnClickListener(new ButtonClickListener(""));
+		btn5.setOnClickListener(new ButtonClickListener(""));
+		btn6.setOnClickListener(new ButtonClickListener(""));
 
 		reedeemButton.setOnClickListener(null);
 
@@ -121,11 +121,9 @@ public class HomeMiddleFragment extends Fragment {
 	private class ButtonClickListener implements OnClickListener {
 
 		String barcode;
-		int pos;
 
-		ButtonClickListener(String barcode, int pos) {
+		ButtonClickListener(String barcode) {
 			this.barcode = barcode;
-			this.pos = pos;
 		}
 
 		@Override
@@ -133,8 +131,8 @@ public class HomeMiddleFragment extends Fragment {
 
 			Intent intent = new Intent(getActivity(),
 					BarCodeScannerActvitiy.class);
-			intent.putExtra(Constants.BARCODE, barcode);
-			intent.putExtra(Constants.TICKET_NO, getImageCount() + 1);
+			intent.putExtra(JBConstants.BARCODE, barcode);
+			intent.putExtra(JBConstants.TICKET_NO, getImageCount() + 1);
 			startActivity(intent);
 			getActivity().finish();
 
@@ -215,7 +213,7 @@ public class HomeMiddleFragment extends Fragment {
 
 		if (count == 3 || count == 5) {
 			isAccountSetup = Utility.getPreference(getActivity(),
-					Constants.ACCOUNT_SAVED);
+					JBConstants.ACCOUNT_SAVED);
 			if (isAccountSetup == null || isAccountSetup.isEmpty()) {
 				DialogFragment popup = new MessageDialog();
 				popup.show(getChildFragmentManager(), "popup");
@@ -230,7 +228,7 @@ public class HomeMiddleFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					isAccountSetup = Utility.getPreference(getActivity(),
-							Constants.ACCOUNT_SAVED);
+							JBConstants.ACCOUNT_SAVED);
 					DialogFragment dialog = null;
 					String dialogTag = null;
 					if (isAccountSetup != null && !isAccountSetup.isEmpty()) {
