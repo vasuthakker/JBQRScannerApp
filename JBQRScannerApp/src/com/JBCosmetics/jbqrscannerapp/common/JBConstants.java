@@ -21,7 +21,10 @@ public final class JBConstants {
 	public static final String AUTH_URL = "AUTH_URL";
 	public static final String USER_ACCOUNT_URL = "USER_ACCOUNT_URL";
 	public static final String LAST_CLAIM_PUSHED_TIME = "LAST_CLAIM_PUSHED_TIME";
-	
-	public static final String QR_SCAN_URL="QR_SCAN_URL";
+
+	public static final String QR_SCAN_URL = "QR_SCAN_URL";
+
+	public static final String USERNAME = "USERNAME";
+	public static final String PASSWORD = "PASSWORD";
 
 }

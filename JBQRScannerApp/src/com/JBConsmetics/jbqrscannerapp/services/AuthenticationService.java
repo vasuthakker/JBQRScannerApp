@@ -42,8 +42,10 @@ public class AuthenticationService extends IntentService {
 		// making request for authentication
 		AuthenticationRequestEntity request = new AuthenticationRequestEntity();
 		request.setDeviceid(deviceId);
-		request.setUsername("jbcosmetic");
-		request.setPassword("cyrus763");
+		request.setUsername(PropertyReader.getProperty(getApplicationContext(),
+				JBConstants.USERNAME));
+		request.setPassword(PropertyReader.getProperty(getApplicationContext(),
+				JBConstants.PASSWORD));
 
 		Gson gson = new Gson();
 		String jsonResponse = Utility.sendPost(PropertyReader.getProperty(

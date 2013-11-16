@@ -261,6 +261,9 @@ public class BarCodeScannerActvitiy extends FragmentActivity {
 					new ColorDrawable(android.graphics.Color.TRANSPARENT));
 			dialog.setContentView(R.layout.qrmessage_dialog);
 
+			dialog.setCancelable(false);
+			dialog.setCanceledOnTouchOutside(false);
+			
 			Button btnOk = (Button) dialog.findViewById(R.id.message_dialog_ok);
 
 			btnOk.setOnClickListener(new OnClickListener() {
@@ -291,6 +294,9 @@ public class BarCodeScannerActvitiy extends FragmentActivity {
 					new ColorDrawable(android.graphics.Color.TRANSPARENT));
 			dialog.setContentView(R.layout.qrmessage_dialog);
 
+			dialog.setCancelable(false);
+			dialog.setCanceledOnTouchOutside(false);
+			
 			TextView title = (TextView) dialog.findViewById(R.id.dialog_title);
 			title.setText(getString(R.string.error_dialog_title));
 			title.setTextColor(getResources().getColor(R.color.maroon));

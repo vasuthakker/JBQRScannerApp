@@ -317,6 +317,9 @@ public class HomeMiddleFragment extends Fragment {
 
 			dialog.setContentView(R.layout.account_popup_dialog);
 
+			dialog.setCancelable(false);
+			dialog.setCanceledOnTouchOutside(false);
+			
 			TextView titleTextView = (TextView) dialog
 					.findViewById(R.id.popup_title);
 			TextView messageTextView = (TextView) dialog

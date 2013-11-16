@@ -43,5 +43,7 @@
     <string name="wrong_passcode_title">Code Invalid</string>
     <string name="wrong_passcode_message">Incorrect code please try again</string>
     <string name="progressbar_message">Saving account details, Please wait</string>
+    <string name="error_internet_not_available_title">No Internet connectioin</string>
+    <string name="error_internet_not_available_detail">The device must require an active internet connection for the first time</string>
 
 </resources>
