@@ -1,6 +1,5 @@
 package com.JBCosmetics.jbqrscannerapp.fragments;
 
-import android.app.DownloadManager.Request;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -27,7 +26,6 @@ import com.JBCosmetics.jbqrscannerapp.activities.TermsNConditionActivity;
 import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
 import com.JBCosmetics.jbqrscannerapp.common.PropertyReader;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
-import com.google.android.gms.internal.em;
 import com.google.gson.Gson;
 
 public class HomeAccountFragment extends Fragment {
