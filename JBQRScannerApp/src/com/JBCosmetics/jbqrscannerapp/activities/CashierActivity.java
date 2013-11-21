@@ -2,6 +2,8 @@ package com.JBCosmetics.jbqrscannerapp.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -15,8 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.JBConsmetics.jbqrscannerapp.services.AuthenticationService;
 import com.JBCosmetics.jbqrscannerapp.R;
+import com.JBCosmetics.jbqrscannerapp.common.DataBaseHelper;
 import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
+import com.JBCosmetics.jbqrscannerapp.common.PropertyReader;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
 
 public class CashierActivity extends FragmentActivity {
@@ -62,7 +67,9 @@ public class CashierActivity extends FragmentActivity {
 				enteredPasscode.append(edittext_3.getText().toString());
 				enteredPasscode.append(edittext_4.getText().toString());
 
-				if (enteredPasscode.toString().equals(JBConstants.RESETPASSCODE)) {
+				if (enteredPasscode.toString().equals(
+						PropertyReader.getProperty(getApplicationContext(),
+								JBConstants.RESET_PASSWORD))) {
 
 					// getting values from preference
 					String isAccountAdded = Utility.getPreference(
@@ -89,7 +96,8 @@ public class CashierActivity extends FragmentActivity {
 					Utility.setPreference(getApplicationContext(),
 							JBConstants.ACCOUNT_EMAIL, accountEmail);
 					Utility.setPreference(getApplicationContext(),
-							JBConstants.ACCOUNT_PHONE_NUMBER, accountPhoneNumber);
+							JBConstants.ACCOUNT_PHONE_NUMBER,
+							accountPhoneNumber);
 					Utility.setPreference(getApplicationContext(),
 							JBConstants.MESSAGE_DIALOG_SHOWN, QRScandialogShown);
 
@@ -104,6 +112,18 @@ public class CashierActivity extends FragmentActivity {
 				edittext_2.setText("");
 				edittext_3.setText("");
 				edittext_4.setText("");
+
+				// truncating table
+				DataBaseHelper dbHelper = new DataBaseHelper(
+						getApplicationContext());
+				SQLiteDatabase db = dbHelper.getWritableDatabase();
+				DataBaseHelper.truncateTables(db);
+				db.close();
+
+				// starting service to get new qr codes
+				Intent intent = new Intent(getApplicationContext(),
+						AuthenticationService.class);
+				startService(intent);
 
 			}
 		});
