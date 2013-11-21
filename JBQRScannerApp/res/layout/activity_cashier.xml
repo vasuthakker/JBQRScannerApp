@@ -54,9 +54,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1" >
-
         </EditText>
 
         <EditText
@@ -66,8 +65,11 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:inputType="number"
-            android:maxLength="1" />
+            android:inputType="numberPassword"
+            android:maxLength="1" >
+
+            <requestFocus />
+        </EditText>
 
         <EditText
             android:id="@+id/cashier_edit_3"
@@ -76,7 +78,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1" />
 
         <EditText
@@ -86,9 +88,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="1" >
-
         </EditText>
     </LinearLayout>
 
