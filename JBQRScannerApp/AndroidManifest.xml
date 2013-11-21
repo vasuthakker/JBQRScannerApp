@@ -64,15 +64,21 @@
         <activity
             android:name="com.JBCosmetics.jbqrscannerapp.activities.CashierActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
+            android:windowSoftInputMode="adjustResize" >
         </activity>
-        <service android:name="com.JBConsmetics.jbqrscannerapp.services.AuthenticationService"></service>
-        <receiver android:name="com.JBConsmetics.jbqrscannerapp.receivers.NetworkChangeReceiver">
+
+        <service android:name="com.JBConsmetics.jbqrscannerapp.services.AuthenticationService" >
+        </service>
+
+        <receiver android:name="com.JBConsmetics.jbqrscannerapp.receivers.NetworkChangeReceiver" >
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
-        <service android:name="com.JBConsmetics.jbqrscannerapp.services.SendRequestForClaimsService"></service>
+
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="76f84191b2211b9ae292e972235130da8bc5812c" />
     </application>
 
 </manifest>
