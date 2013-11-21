@@ -17,12 +17,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.JBConsmetics.jbqrscannerapp.services.AuthenticationService;
 import com.JBCosmetics.jbqrscannerapp.R;
 import com.JBCosmetics.jbqrscannerapp.common.DataBaseHelper;
 import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
 import com.JBCosmetics.jbqrscannerapp.common.PropertyReader;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.services.AuthenticationService;
 
 public class CashierActivity extends FragmentActivity {
 

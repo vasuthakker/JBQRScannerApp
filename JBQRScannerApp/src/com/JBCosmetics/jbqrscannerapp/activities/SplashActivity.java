@@ -1,6 +1,7 @@
 package com.JBCosmetics.jbqrscannerapp.activities;
 
 import com.crashlytics.android.Crashlytics;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -16,10 +17,10 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.JBConsmetics.jbqrscannerapp.services.AuthenticationService;
 import com.JBCosmetics.jbqrscannerapp.R;
 import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.services.AuthenticationService;
 
 public class SplashActivity extends FragmentActivity {
 

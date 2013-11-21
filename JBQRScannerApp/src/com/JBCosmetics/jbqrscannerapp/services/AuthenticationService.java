@@ -1,4 +1,4 @@
-package com.JBConsmetics.jbqrscannerapp.services;
+package com.JBCosmetics.jbqrscannerapp.services;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import android.content.Intent;
 import android.provider.Settings.Secure;
 import android.util.Log;
 
-import com.JBConsmetics.jbqrscannerapp.entities.AuthenticationRequestEntity;
-import com.JBConsmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.QrCode;
-import com.JBConsmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.Response;
 import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
 import com.JBCosmetics.jbqrscannerapp.common.PropertyReader;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.entities.AuthenticationRequestEntity;
+import com.JBCosmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.QrCode;
+import com.JBCosmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.Response;
 import com.JBCosmetics.jbqrscannerapp.helper.QRCodesHelper;
 import com.google.gson.Gson;
 

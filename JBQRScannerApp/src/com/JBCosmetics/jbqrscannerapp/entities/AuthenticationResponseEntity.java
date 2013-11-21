@@ -1,4 +1,4 @@
-package com.JBConsmetics.jbqrscannerapp.entities;
+package com.JBCosmetics.jbqrscannerapp.entities;
 
 import java.util.ArrayList;
 import java.util.List;

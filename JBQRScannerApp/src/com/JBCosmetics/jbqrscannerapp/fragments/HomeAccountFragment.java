@@ -18,14 +18,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.JBConsmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.Response;
-import com.JBConsmetics.jbqrscannerapp.entities.UserAccountInfoRequestEntity;
 import com.JBCosmetics.jbqrscannerapp.R;
 import com.JBCosmetics.jbqrscannerapp.activities.PrivacyPolicyActivity;
 import com.JBCosmetics.jbqrscannerapp.activities.TermsNConditionActivity;
 import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
 import com.JBCosmetics.jbqrscannerapp.common.PropertyReader;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.entities.UserAccountInfoRequestEntity;
+import com.JBCosmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.Response;
 import com.google.gson.Gson;
 
 public class HomeAccountFragment extends Fragment {

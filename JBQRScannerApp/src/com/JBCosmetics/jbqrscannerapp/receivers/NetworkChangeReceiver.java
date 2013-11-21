@@ -1,4 +1,4 @@
-package com.JBConsmetics.jbqrscannerapp.receivers;
+package com.JBCosmetics.jbqrscannerapp.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

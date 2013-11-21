@@ -30,13 +30,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.JBConsmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.QrCode;
-import com.JBConsmetics.jbqrscannerapp.entities.ClaimRequestEntity;
 import com.JBCosmetics.jbqrscannerapp.R;
 import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
 import com.JBCosmetics.jbqrscannerapp.common.LocationTracker;
 import com.JBCosmetics.jbqrscannerapp.common.SendRequestForClaims;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.entities.ClaimRequestEntity;
+import com.JBCosmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.QrCode;
 import com.JBCosmetics.jbqrscannerapp.fragments.HomeMiddleFragment;
 import com.JBCosmetics.jbqrscannerapp.helper.QRClaimsHelper;
 import com.JBCosmetics.jbqrscannerapp.helper.QRCodesHelper;

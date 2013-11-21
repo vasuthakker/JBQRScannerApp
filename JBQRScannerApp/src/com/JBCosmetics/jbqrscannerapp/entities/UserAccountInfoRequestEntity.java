@@ -1,4 +1,4 @@
-package com.JBConsmetics.jbqrscannerapp.entities;
+package com.JBCosmetics.jbqrscannerapp.entities;
 
 public class UserAccountInfoRequestEntity {
 

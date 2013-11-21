@@ -11,8 +11,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.JBConsmetics.jbqrscannerapp.entities.ClaimRequestEntity;
 import com.JBCosmetics.jbqrscannerapp.common.DataBaseHelper;
+import com.JBCosmetics.jbqrscannerapp.entities.ClaimRequestEntity;
 
 /**
  * Helper class for qr claims

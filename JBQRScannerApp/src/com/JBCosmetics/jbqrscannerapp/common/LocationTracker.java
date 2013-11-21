@@ -4,7 +4,7 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 
-import com.JBConsmetics.jbqrscannerapp.entities.ClaimRequestEntity;
+import com.JBCosmetics.jbqrscannerapp.entities.ClaimRequestEntity;
 
 public class LocationTracker {
 

@@ -4,8 +4,8 @@ import java.util.List;
 
 import android.content.Context;
 
-import com.JBConsmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.Response;
-import com.JBConsmetics.jbqrscannerapp.entities.ClaimRequestEntity;
+import com.JBCosmetics.jbqrscannerapp.entities.ClaimRequestEntity;
+import com.JBCosmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.Response;
 import com.JBCosmetics.jbqrscannerapp.helper.QRClaimsHelper;
 import com.google.gson.Gson;
 
