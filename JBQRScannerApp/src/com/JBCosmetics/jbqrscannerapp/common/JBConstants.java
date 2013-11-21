@@ -8,7 +8,6 @@ public final class JBConstants {
 	public static final String PREFERENCE_NAME = "JBCosmetics";
 	public static final String ACCOUNT_SAVED = "ACCOUNT_SAVED";
 	public static final String TOTAL_TICKET = "TOTAL_TICKET";
-	public static final String RESETPASSCODE = "1234";
 	public static final String ICONVLIBRARYNAME = "iconv";
 	public static final String ACCOUNT_NAME = "ACCOUNT_NAME";
 	public static final String ACCOUNT_EMAIL = "ACCOUNT_EMAIL";
@@ -26,5 +25,10 @@ public final class JBConstants {
 
 	public static final String USERNAME = "USERNAME";
 	public static final String PASSWORD = "PASSWORD";
+
+	public static final int INACTIVE = 0;
+	public static final int ACTIVE = 1;
+
+	public static final String RESET_PASSWORD = "RESET_PASSWORD";
 
 }
