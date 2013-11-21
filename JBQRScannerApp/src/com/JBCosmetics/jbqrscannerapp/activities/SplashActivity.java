@@ -1,5 +1,6 @@
 package com.JBCosmetics.jbqrscannerapp.activities;
 
+import com.crashlytics.android.Crashlytics;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -29,6 +30,7 @@ public class SplashActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Crashlytics.start(this);
 		// Crashlytics.start(this);
 		setContentView(R.layout.activity_splash);
 
