@@ -20,9 +20,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 1;
 
-	private static final String CREATE_TABLE_QR_CLAIMS = "CREATE TABLE QR_CLAIMS(_ID INTEGER PRIMARY KEY AUTOINCREMENT,QR_CODE_ID INTEGER NOT NULL,LATTITUTDE TEXT NOT NULL,LONGITUDE TEXT NOT NULL,SCAN_TIME INTEGER)";
-	
+	private static final String CREATE_TABLE_QR_CLAIMS = "CREATE TABLE QR_CLAIMS(_ID INTEGER PRIMARY KEY AUTOINCREMENT,QR_CODE_ID INTEGER NOT NULL,LATTITUTDE TEXT NOT NULL,LONGITUDE TEXT NOT NULL,SCAN_TIME INTEGER,VARIFIED INTEGER)";
+
 	private static final String CREATE_TABLE_QR_CODES = "CREATE TABLE QR_CODES(_ID INTEGER PRIMARY KEY AUTOINCREMENT,CODE_ID INTEGER NOT NULL,CODE TEXT NOT NULL,PIN TEXT NOT NULL,LOCATION_ID INTEGER NOT NULL)";
+
+	private static final String DROP_QR_CLAIMS = "DROP TABLE QR_CLAIMS";
+	private static final String DROP_QR_CODES = "DROP TABLE QR_CODES";
 
 	/**
 	 * Constructor Takes and keeps a reference of the passed context in order to
@@ -56,6 +59,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+		truncateTables(db);
+	}
+
+	public static void truncateTables(SQLiteDatabase db) {
+		db.execSQL(DROP_QR_CLAIMS);
+		db.execSQL(DROP_QR_CODES);
+
+		db.execSQL(CREATE_TABLE_QR_CLAIMS);
+		db.execSQL(CREATE_TABLE_QR_CODES);
 
 	}
 

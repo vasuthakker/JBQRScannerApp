@@ -21,12 +21,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.JBConsmetics.jbqrscannerapp.entities.ClaimRequestEntity;
 import com.JBCosmetics.jbqrscannerapp.R;
 import com.JBCosmetics.jbqrscannerapp.activities.BarCodeScannerActvitiy;
 import com.JBCosmetics.jbqrscannerapp.activities.CashierActivity;
 import com.JBCosmetics.jbqrscannerapp.activities.HomeActivity;
 import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
 import com.JBCosmetics.jbqrscannerapp.common.Utility;
+import com.JBCosmetics.jbqrscannerapp.helper.QRClaimsHelper;
 
 public class HomeMiddleFragment extends Fragment {
 	private String isAccountSetup = null;
@@ -58,6 +60,8 @@ public class HomeMiddleFragment extends Fragment {
 	private static final int RESULT_OK = 1;
 
 	private int count = 1;
+
+	private int varified = 0;;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -112,7 +116,7 @@ public class HomeMiddleFragment extends Fragment {
 		try {
 			value = Integer.parseInt(Utility.getPreference(getActivity(), key));
 		} catch (NumberFormatException e) {
-			Log.e(TAG, "NumberFormatException");
+			Log.e(TAG, "NumberFormatException while parsing from preference");
 		}
 		return value;
 	}
@@ -221,27 +225,43 @@ public class HomeMiddleFragment extends Fragment {
 
 		}
 		if (count >= 6) {
-			reedeemButton.setBackgroundColor(getResources().getColor(
-					R.color.liteblue_1));
-			reedeemButton.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					isAccountSetup = Utility.getPreference(getActivity(),
-							JBConstants.ACCOUNT_SAVED);
-					DialogFragment dialog = null;
-					String dialogTag = null;
-					if (isAccountSetup != null && !isAccountSetup.isEmpty()) {
-						dialog = new RedeemDialog();
-						dialogTag = "redeem";
-					} else {
-						dialog = new MessageDialog();
-						dialogTag = "popup";
-					}
-					dialog.show(getChildFragmentManager(), dialogTag);
-
+			// check all the claims are verified
+			List<ClaimRequestEntity> claims = QRClaimsHelper.selectClaim(
+					getActivity(), null, null, null, null, null);
+			varified = 0;
+			for (ClaimRequestEntity claim : claims) {
+				if (claim.getIsVarified() == JBConstants.INACTIVE) {
+					varified++;
 				}
-			});
+			}
+			if (varified == 0) {
+				reedeemButton.setBackgroundColor(getResources().getColor(
+						R.color.liteblue_1));
+
+				reedeemButton.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						DialogFragment dialog = new RedeemDialog();
+						dialog.show(getChildFragmentManager(), "redeem");
+					}
+				});
+			} else {
+				reedeemButton.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						isAccountSetup = Utility.getPreference(getActivity(),
+								JBConstants.ACCOUNT_SAVED);
+						if (isAccountSetup != null && !isAccountSetup.isEmpty()) {
+							DialogFragment dialog = new MessageDialog();
+							dialog.show(getChildFragmentManager(), "popup");
+						}
+
+					}
+				});
+			}
+
 		} else {
 			reedeemButton.setBackgroundColor(getResources().getColor(
 					R.color.grey));
@@ -319,7 +339,7 @@ public class HomeMiddleFragment extends Fragment {
 
 			dialog.setCancelable(false);
 			dialog.setCanceledOnTouchOutside(false);
-			
+
 			TextView titleTextView = (TextView) dialog
 					.findViewById(R.id.popup_title);
 			TextView messageTextView = (TextView) dialog

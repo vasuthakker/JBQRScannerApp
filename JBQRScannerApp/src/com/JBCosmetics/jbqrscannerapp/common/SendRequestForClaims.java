@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 
+import com.JBConsmetics.jbqrscannerapp.entities.AuthenticationResponseEntity.Response;
 import com.JBConsmetics.jbqrscannerapp.entities.ClaimRequestEntity;
 import com.JBCosmetics.jbqrscannerapp.helper.QRClaimsHelper;
 import com.google.gson.Gson;
@@ -14,17 +15,14 @@ public class SendRequestForClaims {
 
 		if (Utility.isConnectedToInternet(context)) {
 			Utility.setStrictPolicy();
-			String lastQRClaimPushdTime = Utility.getPreference(context,
-					JBConstants.LAST_CLAIM_PUSHED_TIME);
-			if (lastQRClaimPushdTime == null || lastQRClaimPushdTime.isEmpty()) {
-				lastQRClaimPushdTime = "0";
-			}
 
 			// get all the claims
 			List<ClaimRequestEntity> claimRequestEntities = QRClaimsHelper
-					.selectClaim(context, QRClaimsHelper.KEY_SCAN_TIME + "> ?",
-							new String[] { lastQRClaimPushdTime }, null, null,
-							null);
+					.selectClaim(
+							context,
+							QRClaimsHelper.KEY_VARIFIED + "= ?",
+							new String[] { String.valueOf(JBConstants.INACTIVE) },
+							null, null, null);
 
 			if (claimRequestEntities != null && !claimRequestEntities.isEmpty()) {
 				// sending request
@@ -33,15 +31,24 @@ public class SendRequestForClaims {
 							JBConstants.AUTH_TOKEN));
 					claim.setDeviceid(Utility.getPreference(context,
 							JBConstants.DEVICE_ID));
-					String jsonRequest = new Gson().toJson(claim);
-					Utility.sendPost(PropertyReader.getProperty(context,
-							JBConstants.QR_SCAN_URL), jsonRequest.replace(
-							"longs", "long"));
-				}
+					Gson gson = new Gson();
+					String jsonRequest = gson.toJson(claim);
+					String jsonResponse = Utility.sendPost(PropertyReader
+							.getProperty(context, JBConstants.QR_SCAN_URL),
+							jsonRequest.replace("longs", "long"));
 
-				Utility.setPreference(context,
-						JBConstants.LAST_CLAIM_PUSHED_TIME,
-						String.valueOf(System.currentTimeMillis()));
+					Response response = gson.fromJson(
+							jsonResponse.substring(jsonResponse.indexOf('{')),
+							Response.class);
+					if (response != null) {
+						if (response.getResult() == JBConstants.ACTIVE) {
+							// update verification of the claim
+							claim.setIsVarified(JBConstants.ACTIVE);
+							QRClaimsHelper.updateClaim(context, claim);
+						}
+					}
+
+				}
 
 			}
 		}
