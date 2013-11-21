@@ -29,6 +29,7 @@ public class QRClaimsHelper {
 	private static final String KEY_LATTITUTDE = "LATTITUTDE";
 	private static final String KEY_LONGITUDE = "LONGITUDE";
 	public static final String KEY_SCAN_TIME = "SCAN_TIME";
+	public static final String KEY_VARIFIED = "VARIFIED";
 
 	private static final String TAG = "QRClaimsHelper";
 
@@ -47,6 +48,7 @@ public class QRClaimsHelper {
 			cv.put(KEY_LATTITUTDE, claim.getLat());
 			cv.put(KEY_LONGITUDE, claim.getLongs());
 			cv.put(KEY_SCAN_TIME, claim.getScanTime());
+			cv.put(KEY_VARIFIED, claim.getIsVarified());
 			db.insert(TABLE_NAME, null, cv);
 
 		} catch (SQLException e) {
@@ -134,6 +136,33 @@ public class QRClaimsHelper {
 		claim.setQr_code_id(cursor.getInt(cursor.getColumnIndex(KEY_QR_CODE_ID)));
 		claim.setId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
 		claim.setScanTime(cursor.getLong(cursor.getColumnIndex(KEY_SCAN_TIME)));
+		claim.setIsVarified(cursor.getInt(cursor.getColumnIndex(KEY_VARIFIED)));
 		return claim;
+	}
+
+	/**
+	 * Method to update claim
+	 * 
+	 * @param context
+	 * @param claim
+	 */
+	public static void updateClaim(Context context, ClaimRequestEntity claim) {
+		DataBaseHelper dbHelper = new DataBaseHelper(context);
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		try {
+			ContentValues cv = new ContentValues();
+			cv.put(KEY_QR_CODE_ID, claim.getQr_code_id());
+			cv.put(KEY_LATTITUTDE, claim.getLat());
+			cv.put(KEY_LONGITUDE, claim.getLongs());
+			cv.put(KEY_SCAN_TIME, claim.getScanTime());
+			cv.put(KEY_VARIFIED, claim.getIsVarified());
+			db.update(TABLE_NAME, cv, KEY_ID + "=?",
+					new String[] { String.valueOf(claim.getId()) });
+
+		} catch (SQLException e) {
+			Log.e(TAG, "SQLException while inserting claim", e);
+		} finally {
+			db.close();
+		}
 	}
 }

@@ -1,7 +1,9 @@
 package com.JBConsmetics.jbqrscannerapp.entities;
 
+import com.JBCosmetics.jbqrscannerapp.common.JBConstants;
+
 public class ClaimRequestEntity {
-	
+
 	private int id;
 	private String auth;
 	private int qr_code_id;
@@ -11,6 +13,7 @@ public class ClaimRequestEntity {
 	private String var_accuracy;
 	private String deviceid;
 	private long scanTime;
+	private int isVarified = JBConstants.INACTIVE;
 
 	public String getAuth() {
 		return auth;
@@ -82,6 +85,14 @@ public class ClaimRequestEntity {
 
 	public void setScanTime(long scanTime) {
 		this.scanTime = scanTime;
+	}
+
+	public int getIsVarified() {
+		return isVarified;
+	}
+
+	public void setIsVarified(int isVarified) {
+		this.isVarified = isVarified;
 	}
 
 }
